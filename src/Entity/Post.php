@@ -4,19 +4,12 @@ namespace App\Entity;
 
 class Post
 {
-    private $userId;
-    private $id;
-    private $title;
-    private $body;
-
-    public function __construct(int $userId, int $id, string $title, string $body)
-    {
-        //php 8...
-        $this->userId = $userId;
-        $this->id = $id;
-        $this->title = $title;
-        $this->body = $body;
-    }
+    public function __construct(
+        private int $userId, 
+        private int $id, 
+        private string $title, 
+        private string $body
+    ) {}
 
     public static function fromObject($data): Post
     {

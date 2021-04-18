@@ -47,7 +47,7 @@ class HandlerGuzzle implements HandlerInterface
     public function getPost(int $postId): Post
     {
         $response = $this->client->get("posts/{$postId}");
-        $data = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR); //ugly, fix in php 8
+        $data = json_decode($response->getBody(), flags: JSON_THROW_ON_ERROR); //ugly, fix in php 8
         return Post::fromObject($data);
     }
     
@@ -57,7 +57,7 @@ class HandlerGuzzle implements HandlerInterface
     public function getAllPosts(): array
     {
         $response = $this->client->get('posts');
-        $posts = json_decode($response->getBody(), false, 512, JSON_THROW_ON_ERROR); //ugly, fix in php 8
+        $posts = json_decode($response->getBody(), flags: JSON_THROW_ON_ERROR); //ugly, fix in php 8
         return array_map(fn ($data) => Post::fromObject($data), $posts);
     } 
 }
